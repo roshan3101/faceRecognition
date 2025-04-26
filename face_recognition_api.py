@@ -157,6 +157,10 @@ if __name__ == '__main__':
         logger.error("Failed to initialize recognizer")
         exit(1)
     
-    # Start the Flask server
-    port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port) 
+    # Start the Flask server (development only)
+    if os.getenv('FLASK_ENV') == 'development':
+        port = int(os.getenv('PORT', 5000))
+        app.run(host='0.0.0.0', port=port)
+    else:
+        # Production mode - Gunicorn will handle the server
+        logger.info("Running in production mode with Gunicorn") 
