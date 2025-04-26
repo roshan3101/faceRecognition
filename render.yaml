@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: face-recognition-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -c gunicorn_config.py wsgi:app
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: PORT
+        value: 5000
+    plan: standard
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+      targetMemoryPercent: 80 
