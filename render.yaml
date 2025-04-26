@@ -9,8 +9,8 @@ services:
         sync: false
       - key: PORT
         value: 5000
-    plan: standard
+    plan: free
     scaling:
       minInstances: 1
       maxInstances: 1
-      targetMemoryPercent: 80 
+    healthCheckPath: /health 
